@@ -7,14 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'order-bg': '#f8f4e6',
-        'order-line': '#a39f90',
+        'order-bg': '#FFFBF0',
+        'order-line': '#D4C9B3',
         'order-text': '#2c2c2c',
-        'order-red': '#d32f2f',
+        'order-red': '#E63946', // Chili Red
+        'order-yellow': '#F4A261', // Mustard Yellow
+        'order-green': '#2A9D8F', // Basil Green
       },
       fontFamily: {
         'sans': ['Pretendard', 'sans-serif'],
-        'handwriting': ['"Gowun Dodum"', 'sans-serif'], // Or we can use Nanum Pen Script
+        'handwriting': ['"Nanum Pen Script"', 'cursive'], 
+        'marker': ['"Jua"', 'sans-serif'],
       }
     },
   },

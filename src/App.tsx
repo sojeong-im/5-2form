@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Check, ArrowLeft, MapPin } from 'lucide-react'
+import { Check, ArrowLeft, MapPin, Coffee, Pizza, Beer, IceCream } from 'lucide-react'
 
 function App() {
   const [view, setView] = useState<'landing' | 'gallery' | 'form'>('landing');
@@ -100,11 +100,17 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}
-            className="min-h-screen flex flex-col items-center justify-center p-6"
+            className="min-h-screen flex flex-col items-center justify-center p-6 relative"
           >
-            <div className="text-center mb-12">
-              <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter text-order-text drop-shadow-sm">한끼합쇼</h1>
-              <p className="text-xl md:text-2xl font-bold text-gray-600">6기 신입 멤버 모집</p>
+            {/* Background Stickers */}
+            <motion.div animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="absolute top-20 left-10 text-order-red opacity-80"><Pizza size={60} strokeWidth={1.5} /></motion.div>
+            <motion.div animate={{ y: [0, 15, 0], rotate: [0, -15, 0] }} transition={{ repeat: Infinity, duration: 5 }} className="absolute top-40 right-10 text-order-yellow opacity-80"><Beer size={80} strokeWidth={1.5} /></motion.div>
+            <motion.div animate={{ y: [0, -20, 0], rotate: [0, 20, 0] }} transition={{ repeat: Infinity, duration: 6 }} className="absolute bottom-20 left-20 text-order-green opacity-80"><Coffee size={70} strokeWidth={1.5} /></motion.div>
+            <motion.div animate={{ y: [0, 10, 0], rotate: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3.5 }} className="absolute bottom-40 right-20 text-orange-500 opacity-80"><IceCream size={60} strokeWidth={1.5} /></motion.div>
+            
+            <div className="text-center mb-12 relative z-10">
+              <h1 className="text-6xl md:text-8xl font-marker mb-4 tracking-tighter text-order-text drop-shadow-sm rotate-[-2deg]">한끼합쇼</h1>
+              <p className="text-2xl md:text-3xl font-handwriting font-bold text-gray-700 mt-4">6기 신입 멤버 모집 🍽️</p>
             </div>
             
             <div className="flex flex-col gap-4 w-full max-w-sm">
@@ -219,14 +225,27 @@ function App() {
               </button>
 
               {/* Header */}
-              <div className="text-center mb-10 border-b-4 border-double border-order-line pb-6">
-                <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter">한끼합쇼 6기</h1>
-                <h2 className="text-2xl font-bold tracking-widest bg-order-text text-white inline-block px-4 py-1">주 문 서</h2>
+              <div className="text-center mb-10 border-b-4 border-double border-order-line pb-6 relative">
+                
+                {/* Vintage Stamp */}
+                <motion.div 
+                  initial={{ scale: 2, opacity: 0, rotate: -20 }}
+                  animate={{ scale: 1, opacity: 1, rotate: -10 }}
+                  transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+                  className="absolute -top-4 -right-4 md:right-10 border-4 border-order-red text-order-red font-marker text-2xl md:text-3xl px-3 py-1 rounded-sm shadow-sm opacity-80"
+                  style={{ textShadow: '1px 1px 0px rgba(230, 57, 70, 0.3)' }}
+                >
+                  <div className="absolute inset-0 border-2 border-order-red opacity-50 translate-x-1 translate-y-1"></div>
+                  강력추천
+                </motion.div>
+
+                <h1 className="text-5xl md:text-6xl font-marker mb-4 tracking-tighter text-order-text">한끼합쇼 6기</h1>
+                <h2 className="text-2xl font-bold tracking-widest bg-order-yellow text-order-text inline-block px-4 py-1 border-2 border-order-text rotate-1 shadow-[2px_2px_0_#2c2c2c]">주 문 서</h2>
                 
                 <div className="flex justify-between items-end mt-8 text-sm md:text-base font-bold font-mono">
-                  <div>Table No. <span className="border-b-2 border-black inline-block w-12 text-center text-red-600">6</span></div>
-                  <div>Date: <span className="border-b-2 border-black inline-block w-24 text-center">26.09.01</span></div>
-                  <div>Guests: <span className="border-b-2 border-black inline-block w-12 text-center">1</span></div>
+                  <div>Table No. <span className="border-b-2 border-black inline-block w-12 text-center text-order-red font-handwriting text-xl">6</span></div>
+                  <div>Date: <span className="border-b-2 border-black inline-block w-24 text-center font-handwriting text-xl">26.09.01</span></div>
+                  <div>Guests: <span className="border-b-2 border-black inline-block w-12 text-center font-handwriting text-xl">1</span></div>
                 </div>
               </div>
 
