@@ -3,9 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Check, ArrowLeft, MapPin, Coffee, Pizza, Beer, IceCream } from 'lucide-react'
 import { db } from './firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import Admin from './Admin'
 
 function App() {
-  const [view, setView] = useState<'landing' | 'gallery' | 'form'>('landing');
+  const [view, setView] = useState<'landing' | 'gallery' | 'form' | 'admin'>('landing');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Scroll to top when view changes
@@ -510,7 +511,22 @@ function App() {
             <div className="h-4 w-full absolute bottom-[-10px] left-0" style={{ backgroundImage: 'radial-gradient(circle at 10px 10px, transparent 10px, #f8f4e6 11px)', backgroundSize: '20px 20px', backgroundPosition: '-10px 0px', backgroundRepeat: 'repeat-x' }}></div>
           </motion.div>
         )}
+        {/* ADMIN VIEW */}
+        {view === 'admin' && (
+          <Admin onBack={() => setView('landing')} />
+        )}
+
       </AnimatePresence>
+
+      {/* Admin hidden link */}
+      {view === 'landing' && (
+        <button 
+          onClick={() => setView('admin')}
+          className="fixed bottom-4 right-4 text-xs text-gray-400 hover:text-order-text opacity-50"
+        >
+          관리자
+        </button>
+      )}
     </div>
   )
 }
