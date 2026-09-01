@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, ArrowLeft, MapPin, Coffee, Pizza, Beer, IceCream } from 'lucide-react'
+import { db } from './firebase'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 
 function App() {
   const [view, setView] = useState<'landing' | 'gallery' | 'form'>('landing');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Scroll to top when view changes
   useEffect(() => {
@@ -87,6 +90,35 @@ function App() {
         </div>
       </div>
     )
+  }
+
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.phone || !formData.agreeAll) {
+      alert("이름, 연락처, 필수 동의 항목을 확인해주세요!");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await addDoc(collection(db, "applications"), {
+        ...formData,
+        submittedAt: serverTimestamp()
+      });
+      alert("주문이 접수되었습니다! 한끼합쇼에서 만나요 🍽️");
+      setView('landing');
+      // Reset form
+      setFormData({
+        name: '', age: '', gender: '', school: '', location: '', phone: '',
+        favoriteFood: [], restaurantStyle: '', oneMenu: '', activities: [],
+        socialStyle: '', reason: '', agreePeriod: false, agreeCost: false,
+        agreeRules: false, agreeManners: false, agreeAll: false
+      });
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      alert("접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -461,12 +493,13 @@ function App() {
                 <div className="mt-12 flex flex-col items-center">
                   <div className="text-xl font-bold mb-4 font-mono">TOTAL: 열정 가득 1인분</div>
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-order-red text-white text-2xl font-black py-4 px-12 shadow-[4px_4px_0_#2c2c2c] hover:shadow-[2px_2px_0_#2c2c2c] hover:translate-y-[2px] hover:translate-x-[2px] transition-all"
-                    onClick={() => alert("주문이 접수되었습니다! 한끼합쇼에서 만나요")}
+                    whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                    disabled={isSubmitting}
+                    className={`text-white text-2xl font-black py-4 px-12 transition-all ${isSubmitting ? 'bg-gray-400 cursor-not-allowed shadow-[2px_2px_0_#2c2c2c]' : 'bg-order-red shadow-[4px_4px_0_#2c2c2c] hover:shadow-[2px_2px_0_#2c2c2c] hover:translate-y-[2px] hover:translate-x-[2px]'}`}
+                    onClick={handleSubmit}
                   >
-                    주문하기
+                    {isSubmitting ? '주문 접수 중...' : '주문하기 🛎️'}
                   </motion.button>
                 </div>
               </div>
