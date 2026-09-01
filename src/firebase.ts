@@ -1,18 +1,25 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getAnalytics } from "firebase/analytics";
 
-// 사용자님의 Firebase 프로젝트 설정값으로 교체해주세요!
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "API_KEY_HERE",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "PROJECT_ID.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "PROJECT_ID",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "PROJECT_ID.appspot.com",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "SENDER_ID",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "APP_ID"
+  apiKey: "AIzaSyDfzt2oJ1dzu-Ee7bW5o3rFpFlfjcANPFo",
+  authDomain: "eatseoul-54f9e.firebaseapp.com",
+  projectId: "eatseoul-54f9e",
+  storageBucket: "eatseoul-54f9e.firebasestorage.app",
+  messagingSenderId: "151803793406",
+  appId: "1:151803793406:web:e4006717e6c05c7a0dbaaf",
+  measurementId: "G-GXHQ9TWK0H"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize Analytics (only runs in browser environments)
+let analytics;
+if (typeof window !== 'undefined') {
+  analytics = getAnalytics(app);
+}
 
 // Initialize Firestore
 export const db = getFirestore(app);
