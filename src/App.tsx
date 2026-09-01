@@ -148,6 +148,11 @@ function App() {
               <img src="/images/photo3.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg col-span-2" />
               <img src="/images/photo4.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg" />
               <img src="/images/photo5.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg" />
+              <img src="/images/photo6.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg col-span-2" />
+              <img src="/images/photo7.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg" />
+              <img src="/images/photo8.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg" />
+              <img src="/images/photo9.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg col-span-2" />
+              <img src="/images/photo10.jpg" alt="한끼합쇼 추억" className="w-full h-48 md:h-64 object-cover border-4 border-white shadow-lg col-span-2" />
             </div>
 
             {/* Bragging section */}
