@@ -9,6 +9,13 @@ function App() {
   const [view, setView] = useState<'landing' | 'gallery' | 'form' | 'admin'>('landing');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Check URL on load for admin route
+  useEffect(() => {
+    if (window.location.pathname === '/admin' || window.location.pathname === '/admin/') {
+      setView('admin');
+    }
+  }, []);
+
   // Scroll to top when view changes
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -513,20 +520,13 @@ function App() {
         )}
         {/* ADMIN VIEW */}
         {view === 'admin' && (
-          <Admin onBack={() => setView('landing')} />
+          <Admin onBack={() => {
+            window.history.pushState({}, '', '/');
+            setView('landing');
+          }} />
         )}
 
       </AnimatePresence>
-
-      {/* Admin hidden link */}
-      {view === 'landing' && (
-        <button 
-          onClick={() => setView('admin')}
-          className="fixed bottom-4 right-4 text-xs text-gray-400 hover:text-order-text opacity-50"
-        >
-          관리자
-        </button>
-      )}
     </div>
   )
 }
