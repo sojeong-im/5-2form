@@ -1,0 +1,15 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // applications 컬렉션: 신청서 작성(쓰기) 및 관리자 페이지(조회/삭제) 허용
+    match /applications/{document=**} {
+      allow read, write: if true;
+    }
+    
+    // 그 외 다른 문서는 기본 차단
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
